@@ -49,8 +49,9 @@ public class Main {
 
 //        Customer customer = customerService.getCustomerById(1L);
 //        customer.setName("big john");
-//        customerDAO.updateCustomer(customer);
+//        customerService.updateCustomer(customer);
 //        customerService.deleteCustomer(1L);
+
         invService.reportInventory();
         txService.reportUserTx(1L);
     }
