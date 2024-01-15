@@ -43,7 +43,56 @@ public class Product {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+    private Product() {
+    }
+    public static Builder builder() {
+        return new Builder();
+    }
+    public static class Builder {
+        private final Product product = new Product();
 
+        private Builder() {
+        }
+
+        public Builder name(String name) {
+            product.name = name;
+            return this;
+        }
+
+        public Builder supplier(String supplier) {
+            product.supplier = supplier;
+            return this;
+        }
+
+        public Builder price(Long price) {
+            product.price = price;
+            return this;
+        }
+
+        public Builder sku(String sku) {
+            product.sku = sku;
+            return this;
+        }
+
+        public Builder color(String color) {
+            product.color = color;
+            return this;
+        }
+
+        public Builder size(String size) {
+            product.size = size;
+            return this;
+        }
+
+        public Builder type(String type) {
+            product.type = type;
+            return this;
+        }
+
+        public Product build() {
+            return product;
+        }
+    }
     public Long getId() {
         return id;
     }
