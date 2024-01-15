@@ -30,4 +30,16 @@ public class TransactionService {
     public TransactionProduct saveTxProd(TransactionProduct txProd) {
         return txProdDao.saveTxProd(txProd);
     }
+
+    public void reportUserTx(Long userId){
+        List<Object[]> results = txDao.countOrderPerUser(userId);
+        System.out.printf("%-20s %-15s%n", "Customer Name", "Order Count");
+        System.out.println("------------------------------");
+
+        for (Object[] result : results) {
+            System.out.printf("%-20s %-15s%n", result[0], result[1]);
+        }
+
+    }
+
 }

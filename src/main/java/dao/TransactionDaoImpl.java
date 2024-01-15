@@ -39,6 +39,21 @@ public class TransactionDaoImpl implements TransactionDAO {
     }
 
     @Override
+    public List<Object[]> countOrderPerUser(Long userId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Object[]> query = em.createQuery("SELECT c.name, COUNT(t) " +
+                    "FROM Transaction t " +
+                    "JOIN t.customer c " +
+                    "WHERE t.customer.id = :userId GROUP BY c.name", Object[].class);
+            query.setParameter("userId", userId);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
     public Transaction saveTx(Transaction transaction) {
         EntityManager em = emf.createEntityManager();
         try {

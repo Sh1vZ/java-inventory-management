@@ -9,6 +9,7 @@ public interface TransactionDAO {
     Transaction findTxById(Long id);
 
     List<Transaction> findAll();
+    List<Object[]> countOrderPerUser(Long userId);
 
     Transaction saveTx(Transaction transaction);
 

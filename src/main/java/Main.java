@@ -47,11 +47,12 @@ public class Main {
         lineProd.setQuantity(1L);
         txService.saveTxProd(lineProd);
 
-//                Customer customer = customerService.getCustomerById(1L);
+//        Customer customer = customerService.getCustomerById(1L);
 //        customer.setName("big john");
 //        customerDAO.updateCustomer(customer);
 //        customerService.deleteCustomer(1L);
         invService.reportInventory();
+        txService.reportUserTx(1L);
     }
 }
 
