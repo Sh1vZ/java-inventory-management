@@ -33,19 +33,20 @@ public class TransactionService {
     }
 
     public void createTransaction(Customer customer, List<LineItem> items) {
-        List<LineItem> lineItem = new ArrayList<>();
+        List<LineItem> lineItems = new ArrayList<>();
         InventoryService inventoryService = new InventoryService();
-
-        for (LineItem prod : items) {
-            Inventory inv = inventoryService.getInventoryByProductId(prod.getProduct().getId());
-            if (inv.getAmount() - prod.getAmount() < 0) {
-                System.out.println("Cant add product " + prod.getProduct().getName());
+        Long txTotal=0L;
+        for (LineItem lineItem : items) {
+            Inventory inv = inventoryService.getInventoryByProductId(lineItem.getProduct().getId());
+            if (inv.getAmount() - lineItem.getAmount() < 0) {
+                System.out.println("Cant add product " + lineItem.getProduct().getName());
                 continue;
             }
-            lineItem.add(prod);
+            txTotal+=lineItem.getProduct().getPrice() * lineItem.getAmount();
+            lineItems.add(lineItem);
         }
-        if (!lineItem.isEmpty()) {
-            txDao.createTransaction(customer, lineItem);
+        if (!lineItems.isEmpty()) {
+            txDao.createTransaction(customer, lineItems,txTotal);
         }
     }
 

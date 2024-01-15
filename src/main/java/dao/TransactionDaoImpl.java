@@ -67,12 +67,13 @@ public class TransactionDaoImpl implements TransactionDAO {
     }
 
     @Override
-    public Transaction createTransaction(Customer customer, List<LineItem> items) {
+    public Transaction createTransaction(Customer customer, List<LineItem> items,Long txTotal) {
         EntityManager em = emf.createEntityManager();
         Transaction tx = new Transaction();
         try {
             em.getTransaction().begin();
             tx.setCustomer(customer);
+            tx.setTotal(txTotal);
             em.persist(tx);
             for (LineItem item : items) {
                 TransactionProduct lineProd = new TransactionProduct();

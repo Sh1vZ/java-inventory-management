@@ -16,6 +16,10 @@ public class Transaction {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "total")
+    private Long total;
+
+
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TransactionProduct> transactionProducts;
 
@@ -27,6 +31,7 @@ public class Transaction {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
+
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
@@ -37,6 +42,14 @@ public class Transaction {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
     public Set<TransactionProduct> getTransactionProducts() {

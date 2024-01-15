@@ -15,6 +15,6 @@ public interface TransactionDAO {
     List<Object[]> countOrderPerUser(Long userId);
 
     Transaction saveTx(Transaction transaction);
-    Transaction createTransaction(Customer customer, List<LineItem> items);
+    Transaction createTransaction(Customer customer, List<LineItem> items,Long txTotal);
 
 }
