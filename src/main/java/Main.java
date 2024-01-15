@@ -4,6 +4,9 @@ import service.InventoryService;
 import service.ProductService;
 import service.TransactionService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -34,27 +37,19 @@ public class Main {
         inv.setProduct(product);
         invService.createInventory(inv);
 
+        List<LineItem> products=new ArrayList<>();
+        products.add(new LineItem(product,3L));
 
-        Transaction tx = new Transaction();
-        tx.setCustomer(customer);
-        txService.saveTx(tx);
-
-        TransactionProduct lineProd = new TransactionProduct();
-        TransactionProductId prodid = new TransactionProductId();
-        prodid.setProductId(product.getId());
-        prodid.setTransactionId(tx.getId());
-        lineProd.setId(prodid);
-        lineProd.setQuantity(1L);
-        txService.saveTxProd(lineProd);
+        txService.createTransaction(customer,products);
 
 //        Customer customer = customerService.getCustomerById(1L);
 //        customer.setName("big john");
 //        customerService.updateCustomer(customer);
 //        customerService.deleteCustomer(1L);
 
-        invService.reportInventory();
-        txService.reportUserTx(1L);
-        productService.searchAndPrintProductByName("Sample");
+//        invService.reportInventory();
+//        txService.reportUserTx(1L);
+//        productService.searchAndPrintProductByName("Sample");
     }
 }
 
