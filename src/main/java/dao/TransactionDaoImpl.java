@@ -41,7 +41,7 @@ public class TransactionDaoImpl implements TransactionDAO {
     public List<Object[]> countOrderPerUser(Long userId) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Object[]> query = em.createQuery("SELECT c.name, COUNT(t) " + "FROM Transaction t " + "JOIN t.customer c " + "WHERE t.customer.id = :userId GROUP BY c.name", Object[].class);
+            TypedQuery<Object[]> query = em.createQuery("SELECT c.name, COUNT(t),SUM(t.total) " + "FROM Transaction t " + "JOIN t.customer c " + "WHERE t.customer.id = :userId GROUP BY c.name", Object[].class);
             query.setParameter("userId", userId);
             return query.getResultList();
         } finally {

@@ -48,7 +48,7 @@ public class Main {
 //        customerService.deleteCustomer(1L);
 
 //        invService.reportInventory();
-//        txService.reportUserTx(1L);
+        txService.reportCustomerTx(1L);
 //        productService.searchAndPrintProductByName("Sample");
     }
 }

@@ -7,6 +7,7 @@ import entity.*;
 import interace.ProductDAO;
 import interace.TransactionDAO;
 import interace.TransactionProductDAO;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +51,13 @@ public class TransactionService {
         }
     }
 
-    public void reportUserTx(Long userId) {
+    public void reportCustomerTx(Long userId) {
         List<Object[]> results = txDao.countOrderPerUser(userId);
-        System.out.printf("%-20s %-15s%n", "Customer Name", "Order Count");
-        System.out.println("------------------------------");
+        System.out.printf("%-20s %-20s %-15s%n", "Customer Name", "Order Count","Total");
+        System.out.println(StringUtils.repeat("-", 60));
 
         for (Object[] result : results) {
-            System.out.printf("%-20s %-15s%n", result[0], result[1]);
+            System.out.printf("%-20s %-20s %-15s%n", result[0], result[1],result[2]);
         }
 
     }
