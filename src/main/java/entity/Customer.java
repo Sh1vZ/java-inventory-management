@@ -20,7 +20,7 @@ public class Customer {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions;
 
     @CreationTimestamp

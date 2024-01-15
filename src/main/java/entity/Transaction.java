@@ -16,7 +16,7 @@ public class Transaction {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "transaction")
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TransactionProduct> transactionProducts;
 
     @ManyToOne
