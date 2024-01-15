@@ -19,7 +19,7 @@ public class Product {
     private String name;
 
     @Column(name = "supplier")
-    private Long supplier;
+    private String supplier;
 
     @Column(name = "price", nullable = false)
     private Long price;
@@ -60,11 +60,11 @@ public class Product {
         this.name = name;
     }
 
-    public Long getSupplier() {
+    public String getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(Long supplier) {
+    public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
 
