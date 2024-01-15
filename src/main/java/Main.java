@@ -54,6 +54,7 @@ public class Main {
 
         invService.reportInventory();
         txService.reportUserTx(1L);
+        productService.searchAndPrintProductByName("Sample");
     }
 }
 

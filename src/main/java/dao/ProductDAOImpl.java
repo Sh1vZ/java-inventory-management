@@ -6,6 +6,9 @@ import interace.ProductDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class ProductDAOImpl implements ProductDAO {
     private EntityManagerFactory emf;
@@ -31,7 +34,17 @@ public class ProductDAOImpl implements ProductDAO {
 
         return product;
     }
-
+    public List<Product> searchProductByName(String searchTerm) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery( "SELECT p FROM Product p " +
+                    "WHERE LOWER(p.name) LIKE LOWER(:searchTerm)", Product.class);
+            query.setParameter("searchTerm", "%" + searchTerm + "%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     @Override
     public Product getProductById(Long id) {
         EntityManager em = emf.createEntityManager();
