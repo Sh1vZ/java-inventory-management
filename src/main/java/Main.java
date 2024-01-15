@@ -1,82 +1,65 @@
+import dao.CustomerDAOImpl;
+import dao.InventoryDAOImpl;
+import dao.ProductDAOImpl;
 import entity.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import interace.CustomerDAO;
+import interace.InventoryDAO;
+import interace.ProductDAO;
+import service.CustomerService;
+import service.InventoryService;
+import service.ProductService;
+import service.TransactionService;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Create an EntityManagerFactory
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("inv_management");
+        CustomerService customerService = new CustomerService();
+        ProductService productService = new ProductService();
+        InventoryService invService= new InventoryService();
+        TransactionService txService=new TransactionService();
 
-        // Create an EntityManager
-        EntityManager em = emf.createEntityManager();
+        Customer customer = new Customer();
+        customer.setName("John Doe");
+        customerService.createCustomer(customer);
 
-        // Begin a transaction
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
 
-            // Example: Inserting data into all tables
 
-            // 3. Inserting a Product
-            Product product = new Product();
-            product.setName("Smartphone X");
-            product.setPrice(500L);
-            product.setSku("SKU001");
-            product.setColor("Black");
-            product.setSize("Medium");
-            product.setType("Mobile");
-            em.persist(product);
+        Product product = new Product();
+        product.setName("Smartphone X");
+        product.setPrice(500L);
+        product.setSku("SKU001");
+        product.setColor("Black");
+        product.setSize("Medium");
+        product.setType("Mobile");
+        productService.saveProduct(product);
 
-            // 4. Inserting an Inventory
-            Inventory inventory = new Inventory();
-            inventory.setProduct(product); // Use the ID of the created product
-            inventory.setAmount(100L);
-            em.persist(inventory);
+        Inventory inv= new Inventory();
+        inv.setAmount(5L);
+        inv.setProduct(product);
+        invService.createInventory(inv);
 
-            // 5. Inserting a Customer
-            Customer customer = new Customer();
-            customer.setName("John Doe");
-            em.persist(customer);
 
-            // 6. Inserting a Transaction
-            entity.Transaction transactionEntity = new entity.Transaction();
-            transactionEntity.setCustomer(customer);
-            em.persist(transactionEntity);
 
-            // 7. Inserting a TransactionProduct
-            TransactionProduct transactionProduct = new TransactionProduct();
-            TransactionProductId transactionProductId = new TransactionProductId();
-            transactionProductId.setTransactionId(transactionEntity.getId());
-            transactionProductId.setProductId(product.getId()); // Use the ID of the created product
-            transactionProduct.setId(transactionProductId);
-            transactionProduct.setTransaction(transactionEntity);
-            transactionProduct.setProduct(product);
-            transactionProduct.setQuantity(2L);
-            em.persist(transactionProduct);
+        Transaction tx=new Transaction();
+        tx.setCustomer(customer);
+        txService.saveTx(tx);
 
-            // Commit the transaction
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            // Close the EntityManager and EntityManagerFactory
-            em.close();
-            emf.close();
-        }
+        TransactionProduct lineProd=new TransactionProduct();
+        TransactionProductId prodid=new TransactionProductId();
+        prodid.setProductId(product.getId());
+        prodid.setTransactionId(tx.getId());
+        lineProd.setId(prodid);
+        lineProd.setQuantity(1L);
+        txService.saveTxProd(lineProd);
+
+//                Customer customer = customerService.getCustomerById(1L);
+//        customer.setName("big john");
+//        customerDAO.updateCustomer(customer);
+//        customerService.deleteCustomer(1L);
+        invService.reportInventory();
     }
 }
 
