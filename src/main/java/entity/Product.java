@@ -1,5 +1,6 @@
 package entity;
 
+import builder.ProductBuilder;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -44,11 +45,11 @@ public class Product {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    private Product() {
+    public Product() {
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static ProductBuilder builder() {
+        return ProductBuilder.create();
     }
 
     public Long getId() {
@@ -91,51 +92,32 @@ public class Product {
         return updatedAt;
     }
 
-    public static class Builder {
-        private final Product product = new Product();
-
-        private Builder() {
-        }
-
-        public Builder name(String name) {
-            product.name = name;
-            return this;
-        }
-
-        public Builder supplier(String supplier) {
-            product.supplier = supplier;
-            return this;
-        }
-
-        public Builder price(Long price) {
-            product.price = price;
-            return this;
-        }
-
-        public Builder sku(String sku) {
-            product.sku = sku;
-            return this;
-        }
-
-        public Builder color(String color) {
-            product.color = color;
-            return this;
-        }
-
-        public Builder size(String size) {
-            product.size = size;
-            return this;
-        }
-
-        public Builder type(String type) {
-            product.type = type;
-            return this;
-        }
-
-        public Product build() {
-            return product;
-        }
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
 
