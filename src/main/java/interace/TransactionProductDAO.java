@@ -1,9 +1,7 @@
 package interace;
 
-import entity.Transaction;
 import entity.TransactionProduct;
 
-public interface TransactionProductDAO {
+public interface TransactionProductDAO extends BaseDAO<TransactionDAO, Long> {
     TransactionProduct saveTxProd(TransactionProduct txProd);
-
 }

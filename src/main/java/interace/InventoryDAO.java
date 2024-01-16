@@ -1,17 +1,7 @@
 package interace;
 
-import entity.Customer;
 import entity.Inventory;
-import entity.Transaction;
 
-import java.util.List;
-
-public interface InventoryDAO {
-    Inventory saveInventory(Inventory inventory);
-
-    Inventory getInvById(Long id);
+public interface InventoryDAO extends BaseDAO<Inventory, Long> {
     Inventory getInvByProdId(Long id);
-
-    List<Inventory> findAll();
-    void updateInv(Inventory inventory);
 }

@@ -1,18 +1,13 @@
 package dao;
 
-import configuration.JPAConfiguration;
-import entity.Transaction;
 import entity.TransactionProduct;
+import interace.TransactionDAO;
 import interace.TransactionProductDAO;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 
-public class TransactionProductDAOImpl implements TransactionProductDAO {
-
-    private EntityManagerFactory emf;
-
+public class TransactionProductDAOImpl extends BaseDaoImpl<TransactionDAO, Long> implements TransactionProductDAO {
     public TransactionProductDAOImpl() {
-        this.emf =  JPAConfiguration.getEntityManagerFactory();
+        super(TransactionDAO.class);
     }
 
     @Override
@@ -22,8 +17,7 @@ public class TransactionProductDAOImpl implements TransactionProductDAO {
             em.getTransaction().begin();
             em.persist(txProd);
             em.getTransaction().commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             em.getTransaction().rollback();
         } finally {

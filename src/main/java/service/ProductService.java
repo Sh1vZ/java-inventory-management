@@ -1,34 +1,35 @@
 package service;
 
-import dao.InventoryDAOImpl;
 import dao.ProductDAOImpl;
 import entity.Product;
-import interace.InventoryDAO;
 import interace.ProductDAO;
 
 import java.util.List;
 
 public class ProductService {
 
-    private ProductDAO prodDAO;
+    private final ProductDAO prodDAO;
 
     public ProductService() {
         this.prodDAO = new ProductDAOImpl();
     }
+
     public Product saveProduct(Product product) {
-        return prodDAO.saveProduct(product);
+        return prodDAO.save(product);
     }
 
     public Product getProductById(Long id) {
-        return prodDAO.getProductById(id);
+        return prodDAO.findById(id);
     }
 
     public void updateProduct(Product product) {
-        prodDAO.updateProduct(product);
+        prodDAO.update(product);
     }
+
     public void deleteProduct(Long id) {
-        prodDAO.deleteProduct(id);
+        prodDAO.deleteByid(id);
     }
+
     public void searchAndPrintProductByName(String searchTerm) {
         List<Product> products = prodDAO.searchProductByName(searchTerm);
 

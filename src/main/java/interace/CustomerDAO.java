@@ -2,12 +2,6 @@ package interace;
 
 import entity.Customer;
 
-public interface CustomerDAO {
-    Customer saveCustomer(Customer customer);
+public interface CustomerDAO extends BaseDAO<Customer, Long> {
 
-    Customer getCustomerById(Long id);
-
-    void updateCustomer(Customer customer);
-
-    void deleteCustomer(Long id);
 }

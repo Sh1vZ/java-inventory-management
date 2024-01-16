@@ -1,41 +1,18 @@
 package dao;
 
-import configuration.JPAConfiguration;
 import entity.*;
 import interace.TransactionDAO;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class TransactionDaoImpl implements TransactionDAO {
-    private final EntityManagerFactory emf;
+public class TransactionDaoImpl extends BaseDaoImpl<Transaction, Long> implements TransactionDAO {
 
     public TransactionDaoImpl() {
-        this.emf = JPAConfiguration.getEntityManagerFactory();
+        super(Transaction.class);
     }
 
-    @Override
-    public Transaction findTxById(Long id) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            return em.find(Transaction.class, id);
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public List<Transaction> findAll() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Transaction> query = em.createQuery("SELECT t FROM Transaction t", Transaction.class);
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
-    }
 
     @Override
     public List<Object[]> countOrderPerUser(Long userId) {
@@ -50,24 +27,7 @@ public class TransactionDaoImpl implements TransactionDAO {
     }
 
     @Override
-    public Transaction saveTx(Transaction transaction) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(transaction);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-
-        return transaction;
-    }
-
-    @Override
-    public Transaction createTransaction(Customer customer, List<LineItem> items,Long txTotal) {
+    public Transaction createTransaction(Customer customer, List<LineItem> items, Long txTotal) {
         EntityManager em = emf.createEntityManager();
         Transaction tx = new Transaction();
         try {
@@ -84,8 +44,8 @@ public class TransactionDaoImpl implements TransactionDAO {
                 lineProd.setQuantity(item.getAmount());
                 TypedQuery<Inventory> query = em.createQuery("SELECT p FROM Inventory p WHERE p.product.id = :product_id", Inventory.class);
                 query.setParameter("product_id", item.getProduct().getId());
-                Inventory inv= query.getSingleResult();
-                Long newAmount=inv.getAmount() - item.getAmount();
+                Inventory inv = query.getSingleResult();
+                Long newAmount = inv.getAmount() - item.getAmount();
                 inv.setAmount(newAmount);
                 em.persist(lineProd);
                 em.merge(inv);
