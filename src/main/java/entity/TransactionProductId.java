@@ -2,11 +2,8 @@ package entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Embeddable
 public class TransactionProductId implements Serializable {

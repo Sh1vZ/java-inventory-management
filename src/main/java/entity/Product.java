@@ -60,28 +60,56 @@ public class Product {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSupplier() {
         return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
     }
 
     public Long getPrice() {
         return price;
     }
 
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
     public String getSku() {
         return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public String getColor() {
         return color;
     }
 
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public String getSize() {
         return size;
     }
 
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     public String getType() {
         return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Date getCreatedAt() {
@@ -90,34 +118,6 @@ public class Product {
 
     public Date getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }
 
