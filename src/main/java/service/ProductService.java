@@ -55,7 +55,7 @@ public class ProductService {
                 "Product ID", "Name", "Supplier", "Price", "SKU", "Color", "Size", "Type",
                 "Created At", "Updated At");
         if(products.isEmpty()){
-            System.out.println("No customers found");
+            System.out.println("No products found");
             return 0;
         }
         for (Product product : products) {

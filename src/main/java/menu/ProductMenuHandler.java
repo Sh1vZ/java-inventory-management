@@ -94,7 +94,6 @@ public class ProductMenuHandler extends BaseMenuHandler {
         System.out.print("Name(press Enter to skip): ");
         String name = scanner.nextLine();
 
-        System.out.print("Price(press Enter to skip): ");
         Long price = getValidPrice(scanner);
 
         System.out.print("SKU(press Enter to skip): ");
@@ -138,7 +137,7 @@ public class ProductMenuHandler extends BaseMenuHandler {
         }
         Product product = getValidProduct(scanner);
         productService.deleteProduct(product.getId());
-        System.out.println("Customer deleted successfully!");
+        System.out.println("Product deleted successfully!");
 
     }
 }

@@ -38,7 +38,7 @@ public class InventoryService {
     public Integer printAllInventory() {
         List<Inventory> inventories = inventoryDAO.findAll();
         if(inventories.isEmpty()){
-            System.out.println("No customers found");
+            System.out.println("Inventory empty");
             return 0;
         }
         System.out.println(StringUtils.center("Product Inventory", 50, "="));
