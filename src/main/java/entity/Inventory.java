@@ -13,8 +13,8 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "product_id", unique = true, nullable = false)
     private Product product;
 
     @Column(name = "amount", nullable = false)

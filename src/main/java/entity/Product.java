@@ -16,6 +16,9 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Inventory inventory;
+
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -50,6 +53,14 @@ public class Product {
 
     public static ProductBuilder builder() {
         return ProductBuilder.create();
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     public Long getId() {
