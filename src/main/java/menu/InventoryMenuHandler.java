@@ -43,7 +43,6 @@ public class InventoryMenuHandler extends BaseMenuHandler {
         do {
             id = getValidLong(scanner,"Enter inventory id: ");
             inv=inventoryService.getInventoryById(id);
-            scanner.nextLine();
             if (inv==null) {
                 System.out.println("Inventory ID does not exist. Please enter a valid ID.");
             }
@@ -57,8 +56,7 @@ public class InventoryMenuHandler extends BaseMenuHandler {
             return;
         }
         Inventory inv = getValidId(scanner);
-        System.out.print("Enter customer name: ");
-        Long amount = scanner.nextLong();
+        Long amount = getValidLong(scanner,"Amount: ");
         inv.setAmount(amount);
         inventoryService.updateInventory(inv);
         System.out.println("Customer updated successfully!");
