@@ -5,6 +5,7 @@ import entity.Customer;
 import entity.Inventory;
 import entity.Product;
 import interace.ProductDAO;
+import iterator.GenericIterator;
 
 import java.util.List;
 
@@ -58,9 +59,15 @@ public class ProductService {
             System.out.println("No products found");
             return 0;
         }
-        for (Product product : products) {
+        GenericIterator<Product> it = new GenericIterator<>(products);
+
+        while (it.hasNext()) {
+            Product product = it.next();
             printProduct(product);
         }
+//        for (Product product : products) {
+//            printProduct(product);
+//        }
         return products.size();
     }
     public void searchAndPrintProductByName(String searchTerm) {

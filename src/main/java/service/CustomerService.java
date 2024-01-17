@@ -3,6 +3,7 @@ package service;
 import dao.CustomerDAOImpl;
 import entity.Customer;
 import interace.CustomerDAO;
+import iterator.GenericIterator;
 
 import java.util.List;
 
@@ -42,9 +43,15 @@ public class CustomerService {
             System.out.println("No customers found");
             return 0;
         }
-        for (Customer customer : customers) {
+        GenericIterator<Customer> it = new GenericIterator<>(customers);
+
+        while (it.hasNext()) {
+            Customer customer = it.next();
             printCustomer(customer);
         }
+//        for (Customer customer : customers) {
+//            printCustomer(customer);
+//        }
         return customers.size();
     }
 
