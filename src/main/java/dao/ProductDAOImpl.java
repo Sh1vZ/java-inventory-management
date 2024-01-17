@@ -1,5 +1,6 @@
 package dao;
 
+import entity.Inventory;
 import entity.Product;
 import interace.ProductDAO;
 import jakarta.persistence.EntityManager;
@@ -11,6 +12,25 @@ public class ProductDAOImpl extends BaseDaoImpl<Product, Long> implements Produc
 
     public ProductDAOImpl() {
         super(Product.class);
+    }
+
+
+    @Override
+    public Product save(Product e, Inventory i) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(e);
+            em.persist(i);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return e;
     }
 
     public List<Product> searchProductByName(String searchTerm) {

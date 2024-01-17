@@ -1,6 +1,8 @@
 package service;
 
 import dao.ProductDAOImpl;
+import entity.Customer;
+import entity.Inventory;
 import entity.Product;
 import interace.ProductDAO;
 
@@ -15,7 +17,10 @@ public class ProductService {
     }
 
     public Product saveProduct(Product product) {
-        return prodDAO.save(product);
+        Inventory inv=new Inventory();
+        inv.setProduct(product);
+        inv.setAmount(0L);
+        return prodDAO.save(product,inv);
     }
 
     public Product getProductById(Long id) {
@@ -30,6 +35,34 @@ public class ProductService {
         prodDAO.deleteByid(id);
     }
 
+    public List<Product> findAllProducts() {
+        return prodDAO.findAll();
+    }
+    public void printProduct(Product prod) {
+        System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-20s%n", prod.getId(), prod.getName(),prod.getSupplier(),prod.getPrice(),prod.getSku(),prod.getColor(),prod.getSize(),prod.getType(),prod.getCreatedAt(),prod.getUpdatedAt());
+    }
+
+    public void findProductAndPrintout(Long id) {
+        System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-20s%n",
+                "Product ID", "Name", "Supplier", "Price", "SKU", "Color", "Size", "Type",
+                "Created At", "Updated At");
+        printProduct(getProductById(id));
+    }
+
+    public int printAllProducts() {
+        List<Product> products = findAllProducts();
+        System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-20s%n",
+                "Product ID", "Name", "Supplier", "Price", "SKU", "Color", "Size", "Type",
+                "Created At", "Updated At");
+        if(products.isEmpty()){
+            System.out.println("No customers found");
+            return 0;
+        }
+        for (Product product : products) {
+            printProduct(product);
+        }
+        return products.size();
+    }
     public void searchAndPrintProductByName(String searchTerm) {
         List<Product> products = prodDAO.searchProductByName(searchTerm);
 
