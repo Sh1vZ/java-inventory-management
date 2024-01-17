@@ -10,7 +10,7 @@ public interface TransactionDAO extends BaseDAO<Transaction, Long> {
 
     List<Transaction> findAll();
 
-    List<Object[]> countOrderPerUser(Long userId);
+    List<Object[]> countOrderPerUser();
 
     Transaction createTransaction(Customer customer, List<LineItem> items, Long txTotal);
 

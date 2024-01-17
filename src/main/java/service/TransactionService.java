@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class TransactionService {
     private final TransactionDAO txDao;
@@ -49,8 +50,8 @@ public class TransactionService {
         }
     }
 
-    public void reportCustomerTx(Long userId) {
-        List<Object[]> results = txDao.countOrderPerUser(userId);
+    public void reportCustomerTx() {
+        List<Object[]> results = txDao.countOrderPerUser();
         System.out.printf("%-20s %-20s %-15s%n", "Customer Name", "Order Count", "Total");
         System.out.println(StringUtils.repeat("-", 60));
 
