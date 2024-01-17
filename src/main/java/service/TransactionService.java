@@ -32,7 +32,7 @@ public class TransactionService {
         return txProdDao.saveTxProd(txProd);
     }
 
-    public void createTransaction(Customer customer, List<LineItem> items) {
+    public void createTransaction(Customer customer, Set<LineItem> items) {
         List<LineItem> lineItems = new ArrayList<>();
         InventoryService inventoryService = new InventoryService();
         Long txTotal = 0L;
