@@ -29,6 +29,7 @@ public class BaseMenuHandler {
         } while (input <= 0);
         return input;
     }
+
     protected Long getValidPrice(Scanner scanner) {
         String priceInput;
         Long price = null;
@@ -42,12 +43,12 @@ public class BaseMenuHandler {
                     System.out.println("Invalid price format. Please enter a valid number.");
                 }
             }
-        } while (!priceInput.isEmpty());
+        } while (!priceInput.isEmpty() && price==null);
         return price;
     }
 
 
-    protected Long getValidLong(Scanner scanner,String msg) {
+    protected Long getValidLong(Scanner scanner, String msg) {
         String priceInput;
         Long price = null;
         do {
@@ -58,6 +59,7 @@ public class BaseMenuHandler {
                     price = Long.parseLong(priceInput);
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid number.");
+                    scanner.nextLine();
                 }
             }
         } while (price == null);
@@ -65,28 +67,33 @@ public class BaseMenuHandler {
     }
 
     protected Customer getValidCustomerId(Scanner scanner) {
-        Customer cus=null;
-        Long id=null;
-        CustomerService customerService=new CustomerService();
+        Customer cus = null;
+        Long id = null;
+        CustomerService customerService = new CustomerService();
         do {
             System.out.print("Enter customer id: ");
             id = scanner.nextLong();
-            cus=customerService.getCustomerById(id);
+            cus = customerService.getCustomerById(id);
             scanner.nextLine();
-            if (cus==null) {
+            if (cus == null) {
                 System.out.println("Customer ID does not exist. Please enter a valid ID.");
             }
-        } while (cus==null);
+        } while (cus == null);
         return cus;
     }
 
     protected Product getValidProduct(Scanner scanner) {
         Product prod = null;
         Long id = null;
-        ProductService productService=new ProductService();
+        ProductService productService = new ProductService();
         do {
             System.out.print("Enter product id: ");
-            id = scanner.nextLong();
+            try {
+                id = scanner.nextLong();
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+                scanner.nextLine();
+            }
             prod = productService.getProductById(id);
             scanner.nextLine();
             if (prod == null) {

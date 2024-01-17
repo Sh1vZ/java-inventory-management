@@ -92,7 +92,7 @@ public class ProductMenuHandler extends BaseMenuHandler {
         System.out.print("Name(press Enter to skip): ");
         String name = scanner.nextLine();
 
-        Long price = getValidLong(scanner,"Enter price (press Enter to skip): ");
+        Long price = getValidPrice(scanner);
 
         System.out.print("SKU(press Enter to skip): ");
         String sku = scanner.nextLine();
