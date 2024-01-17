@@ -56,8 +56,7 @@ public class TransactionMenuHandler extends BaseMenuHandler {
             return null;
         }
         Product prod = getValidProduct(scanner);
-        System.out.print("Amount: ");
-        Long amount = scanner.nextLong();
+        Long amount = getValidLong(scanner,"Amount: ");
 
         return new LineItem(prod, amount);
     }

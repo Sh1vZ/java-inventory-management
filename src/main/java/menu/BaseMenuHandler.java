@@ -45,6 +45,25 @@ public class BaseMenuHandler {
         } while (!priceInput.isEmpty());
         return price;
     }
+
+
+    protected Long getValidLong(Scanner scanner,String msg) {
+        String priceInput;
+        Long price = null;
+        do {
+            System.out.print(msg);
+            priceInput = scanner.nextLine();
+            if (!priceInput.isEmpty()) {
+                try {
+                    price = Long.parseLong(priceInput);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter a valid number.");
+                }
+            }
+        } while (price == null);
+        return price;
+    }
+
     protected Customer getValidCustomerId(Scanner scanner) {
         Customer cus=null;
         Long id=null;

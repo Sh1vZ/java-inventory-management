@@ -58,9 +58,7 @@ public class ProductMenuHandler extends BaseMenuHandler {
         System.out.print("Name: ");
         String name = getNonEmptyInput(scanner, "Name is mandatory. Please enter a name.");
 
-        System.out.print("Price: ");
-        Long price = getNonEmptyLongInput(scanner, "Price is mandatory. Please enter a SKU.");
-        scanner.nextLine();
+        Long price = getValidLong(scanner, "Price: ");
 
         System.out.print("SKU: ");
         String sku = getNonEmptyInput(scanner, "SKU is mandatory. Please enter a SKU.");
@@ -94,7 +92,7 @@ public class ProductMenuHandler extends BaseMenuHandler {
         System.out.print("Name(press Enter to skip): ");
         String name = scanner.nextLine();
 
-        Long price = getValidPrice(scanner);
+        Long price = getValidLong(scanner,"Enter price (press Enter to skip): ");
 
         System.out.print("SKU(press Enter to skip): ");
         String sku = scanner.nextLine();
@@ -125,8 +123,7 @@ public class ProductMenuHandler extends BaseMenuHandler {
     }
 
     private void findProduct(Scanner scanner) {
-        System.out.print("Enter product id: ");
-        Long id = scanner.nextLong();
+        Long id = getValidLong(scanner,"Enter product id: ");
         productService.findProductAndPrintout(id);
     }
 

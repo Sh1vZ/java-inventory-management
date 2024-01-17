@@ -6,7 +6,7 @@ import service.InventoryService;
 
 import java.util.Scanner;
 
-public class InventoryMenuHandler {
+public class InventoryMenuHandler extends BaseMenuHandler {
 
     InventoryService inventoryService;
 
@@ -41,8 +41,7 @@ public class InventoryMenuHandler {
         Inventory inv=null;
         Long id=null;
         do {
-            System.out.print("Enter inventory id: ");
-            id = scanner.nextLong();
+            id = getValidLong(scanner,"Enter inventory id: ");
             inv=inventoryService.getInventoryById(id);
             scanner.nextLine();
             if (inv==null) {

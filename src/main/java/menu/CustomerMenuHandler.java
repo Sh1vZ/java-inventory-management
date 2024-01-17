@@ -64,8 +64,7 @@ public class CustomerMenuHandler extends BaseMenuHandler {
     }
 
     private void findCustomer(Scanner scanner) {
-        System.out.print("Enter customer id: ");
-        Long id = scanner.nextLong();
+        Long id =getValidLong(scanner,"Enter customer id: ");
         customerService.findCustomerAndPrintout(id);
     }
 
