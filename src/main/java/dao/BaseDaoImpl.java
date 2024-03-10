@@ -63,12 +63,13 @@ public class BaseDaoImpl<T, I> implements BaseDAO<T, I> {
     }
 
     @Override
-    public void update(T e) {
+    public T update(T e) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
+        T updatedEntity = null;
         try {
             transaction.begin();
-            em.merge(e);
+            updatedEntity = em.merge(e);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null && transaction.isActive()) {
@@ -78,17 +79,20 @@ public class BaseDaoImpl<T, I> implements BaseDAO<T, I> {
         } finally {
             em.close();
         }
+        return updatedEntity;
     }
 
     @Override
-    public void deleteByid(I id) {
+    public T deleteByid(I id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
+        T deletedEntity = null;
         try {
             transaction.begin();
             T le = em.find(TClass, id);
             if (le != null) {
                 em.remove(le);
+                deletedEntity = le;
             }
             transaction.commit();
         } catch (Exception ex) {
@@ -99,5 +103,6 @@ public class BaseDaoImpl<T, I> implements BaseDAO<T, I> {
         } finally {
             em.close();
         }
+        return deletedEntity;
     }
 }

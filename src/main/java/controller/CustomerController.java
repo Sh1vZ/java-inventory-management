@@ -62,7 +62,7 @@ public class CustomerController {
         if (validationResponse != null) {
             return validationResponse;
         }
-        customerService.updateCustomer(existingCustomer);
+        existingCustomer = customerService.updateCustomer(existingCustomer);
         return Response.ok(existingCustomer, MediaType.APPLICATION_JSON_TYPE).build();
     }
 
@@ -94,8 +94,8 @@ public class CustomerController {
                     .build();
         }
 
-        customerService.deleteCustomer(id);
-        return Response.status(Response.Status.NO_CONTENT).build();
+        existingCustomer = customerService.deleteCustomer(id);
+        return Response.ok(existingCustomer, MediaType.APPLICATION_JSON_TYPE).build();
     }
 }
 

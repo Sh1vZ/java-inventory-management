@@ -55,12 +55,12 @@ public class CustomerService {
         return customers.size();
     }
 
-    public void deleteCustomer(Long id) {
-        customerDAO.deleteByid(id);
+    public Customer deleteCustomer(Long id) {
+        return customerDAO.deleteByid(id);
     }
 
-    public void updateCustomer(Customer customer) {
-        customerDAO.update(customer);
+    public Customer updateCustomer(Customer customer) {
+        return customerDAO.update(customer);
     }
 
 }

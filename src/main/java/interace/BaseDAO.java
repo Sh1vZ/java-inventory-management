@@ -9,8 +9,8 @@ public interface BaseDAO<T, I> {
 
     List<T> findAll();
 
-    void update(T e);
+    T update(T e);
 
-    void deleteByid(I id);
+    T deleteByid(I id);
 }
 
