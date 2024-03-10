@@ -9,7 +9,9 @@ import jakarta.ws.rs.core.Response;
 import service.CustomerService;
 import util.BodyValidationUtil;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 @Path("/customer")
@@ -50,9 +52,11 @@ public class CustomerController {
     public Response updateCustomer(@PathParam("id") Long id, @Valid Customer customer) {
         Customer existingCustomer = customerService.getCustomerById(id);
         if (existingCustomer == null) {
+            Map<String, String> jsonResponse = Collections.singletonMap("error", "Customer not found");
+
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Customer not found")
-                    .type(MediaType.TEXT_PLAIN)
+                    .entity(jsonResponse)
+                    .type(MediaType.APPLICATION_JSON)
                     .build();
         }
 
@@ -88,9 +92,10 @@ public class CustomerController {
     public Response deleteCustomer(@PathParam("id") Long id) {
         Customer existingCustomer = customerService.getCustomerById(id);
         if (existingCustomer == null) {
+            Map<String, String> jsonResponse = Collections.singletonMap("error", "Customer not found");
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Customer not found")
-                    .type(MediaType.TEXT_PLAIN)
+                    .entity(jsonResponse)
+                    .type(MediaType.APPLICATION_JSON)
                     .build();
         }
 
