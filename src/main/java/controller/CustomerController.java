@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 @Path("/customer")
-public class CustomerController {
+public class CustomerController extends BaseController {
     private final CustomerService customerService;
 
     public CustomerController() {
@@ -39,10 +39,7 @@ public class CustomerController {
         }
 
         customer = customerService.createCustomer(customer);
-        return Response.status(Response.Status.CREATED)
-                .entity(customer)
-                .type(MediaType.APPLICATION_JSON_TYPE)
-                .build();
+        return buildResponse("created", Response.Status.CREATED, customer);
     }
 
     @PUT
@@ -53,11 +50,7 @@ public class CustomerController {
         Customer existingCustomer = customerService.getCustomerById(id);
         if (existingCustomer == null) {
             Map<String, String> jsonResponse = Collections.singletonMap("error", "Customer not found");
-
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(jsonResponse)
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
+            return buildResponse("not-found", Response.Status.NOT_FOUND, jsonResponse);
         }
 
         existingCustomer.setName(customer.getName());
@@ -67,7 +60,7 @@ public class CustomerController {
             return validationResponse;
         }
         existingCustomer = customerService.updateCustomer(existingCustomer);
-        return Response.ok(existingCustomer, MediaType.APPLICATION_JSON_TYPE).build();
+        return buildResponse("updated", Response.Status.OK, existingCustomer);
     }
 
     @GET
@@ -76,14 +69,11 @@ public class CustomerController {
     public Response getCustomer(@PathParam("id") Long id) {
         Customer existingCustomer = customerService.getCustomerById(id);
         if (existingCustomer == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Customer not found")
-                    .type(MediaType.TEXT_PLAIN)
-                    .build();
+            return buildResponse("customer-not-found", Response.Status.NOT_FOUND, null);
         }
 
         customerService.updateCustomer(existingCustomer);
-        return Response.ok(existingCustomer, MediaType.APPLICATION_JSON_TYPE).build();
+        return buildResponse("ok", Response.Status.OK, existingCustomer);
     }
 
     @DELETE
@@ -92,15 +82,11 @@ public class CustomerController {
     public Response deleteCustomer(@PathParam("id") Long id) {
         Customer existingCustomer = customerService.getCustomerById(id);
         if (existingCustomer == null) {
-            Map<String, String> jsonResponse = Collections.singletonMap("error", "Customer not found");
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(jsonResponse)
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        }
+            return buildResponse("customer-not-found", Response.Status.NOT_FOUND, null);
 
+        }
         existingCustomer = customerService.deleteCustomer(id);
-        return Response.ok(existingCustomer, MediaType.APPLICATION_JSON_TYPE).build();
+        return buildResponse("ok", Response.Status.OK, existingCustomer);
     }
 }
 
