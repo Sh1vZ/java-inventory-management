@@ -1,7 +1,6 @@
 package service;
 
 import dao.InventoryDAOImpl;
-import entity.Customer;
 import entity.Inventory;
 import entity.Product;
 import interace.InventoryDAO;
@@ -25,14 +24,18 @@ public class InventoryService {
         return inventoryDAO.getInvByProdId(id);
     }
 
-    public void updateInventory(Inventory inventory) {
-        inventoryDAO.update(inventory);
+    public Inventory updateInventory(Inventory inventory) {
+        return inventoryDAO.update(inventory);
     }
 
     public void printInventory(Inventory inventory) {
         Product product = inventory.getProduct();
         System.out.printf("%-10s %-20s %-20s%n",
                 inventory.getId(), product.getName(), inventory.getAmount());
+    }
+
+    public List<Inventory> getInventories() {
+        return inventoryDAO.findAll();
     }
 
     public Integer printAllInventory() {

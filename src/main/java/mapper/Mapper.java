@@ -13,8 +13,6 @@ public class Mapper {
     }
 
     public static <S, T> List<T> mapList(List<S> sourceList, Class<T> targetClass) {
-        return sourceList.stream()
-                .map(source -> modelMapper.map(source, targetClass))
-                .collect(Collectors.toList());
+        return sourceList.stream().map(source -> modelMapper.map(source, targetClass)).collect(Collectors.toList());
     }
 }
