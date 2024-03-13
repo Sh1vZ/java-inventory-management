@@ -1,7 +1,6 @@
 package service;
 
 import dao.ProductDAOImpl;
-import entity.Customer;
 import entity.Inventory;
 import entity.Product;
 import interace.ProductDAO;
@@ -28,12 +27,12 @@ public class ProductService {
         return prodDAO.findById(id);
     }
 
-    public void updateProduct(Product product) {
-        prodDAO.update(product);
+    public Product updateProduct(Product product) {
+        return prodDAO.update(product);
     }
 
-    public void deleteProduct(Long id) {
-        prodDAO.deleteByid(id);
+    public Product deleteProduct(Long id) {
+        return prodDAO.deleteByid(id);
     }
 
     public List<Product> findAllProducts() {
