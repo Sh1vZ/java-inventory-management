@@ -16,7 +16,7 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Inventory inventory;
 
     @Column(name = "name", nullable = false)
@@ -27,6 +27,7 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private Long price;
+
 
     @Column(name = "sku", nullable = false)
     private String sku;
