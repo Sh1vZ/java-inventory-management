@@ -20,7 +20,7 @@ public class Transaction {
     private Long total;
 
 
-    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<TransactionProduct> transactionProducts;
 
     @ManyToOne

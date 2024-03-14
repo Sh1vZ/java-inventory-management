@@ -24,6 +24,10 @@ public class TransactionService {
         return txDao.findAll();
     }
 
+    public Transaction getTxById(Long id) {
+        return txDao.findById(id);
+    }
+
     public Transaction saveTx(Transaction transaction) {
         return txDao.save(transaction);
     }
@@ -32,7 +36,7 @@ public class TransactionService {
         return txProdDao.saveTxProd(txProd);
     }
 
-    public void createTransaction(Customer customer, Set<LineItem> items) {
+    public Transaction createTransaction(Customer customer, Set<LineItem> items) {
         List<LineItem> lineItems = new ArrayList<>();
         InventoryService inventoryService = new InventoryService();
         Long txTotal = 0L;
@@ -46,8 +50,9 @@ public class TransactionService {
             lineItems.add(lineItem);
         }
         if (!lineItems.isEmpty()) {
-            txDao.createTransaction(customer, lineItems, txTotal);
+            return txDao.createTransaction(customer, lineItems, txTotal);
         }
+        return null;
     }
 
     public void reportCustomerTx() {
