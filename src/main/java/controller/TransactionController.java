@@ -67,7 +67,7 @@ public class TransactionController extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTransaction() {
         List<Transaction> tx = transactionService.getAllTransactions();
-        return buildResponse("created", Response.Status.CREATED, Mapper.mapList(tx, TransactionDTO.class));
+        return buildResponse("ok", Response.Status.OK, Mapper.mapList(tx, TransactionDTO.class));
     }
 
     @GET
