@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5" name="description">
+    <meta content="AdminKit" name="author">
+    <meta content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"
+          name="keywords">
+
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="img/icons/icon-48x48.png" rel="shortcut icon"/>
+
+    <title>Blank Page | AdminKit Demo</title>
+
+    <link href="css/app.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav class="sidebar js-sidebar" id="sidebar">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand" href="index.html">
+                <span class="align-middle">Inventory</span>
+            </a>
+
+            <ul class="sidebar-nav">
+                <li class="sidebar-header">
+                    Pages
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="index.html">
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="customer.html">
+                        <i class="align-middle" data-feather="users"></i> <span class="align-middle">Customers</span>
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="product.html">
+                        <i class="align-middle" data-feather="bag"></i> <span class="align-middle">Product</span>
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="inventory.html">
+                        <i class="align-middle" data-feather="bag"></i> <span class="align-middle">Inventory</span>
+                    </a>
+                </li>
+                <li class="sidebar-header">
+                    Tools & Components
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="ui-buttons.html">
+                        <i class="align-middle" data-feather="square"></i> <span class="align-middle">Buttons</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="ui-forms.html">
+                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Forms</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="ui-cards.html">
+                        <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Cards</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="ui-typography.html">
+                        <i class="align-middle" data-feather="align-left"></i> <span
+                            class="align-middle">Typography</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="icons-feather.html">
+                        <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-header">
+                    Plugins & Addons
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="charts-chartjs.html">
+                        <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="maps-google.html">
+                        <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle js-sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+        </nav>
+
+        <main class="content">
+            <div class="container-fluid p-0">
+
+                <h1 class="h3 mb-3">Customer</h1>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header row">
+                                <h5 class="card-title mb-0 col-6">Empty card</h5>
+                                <div class="col-6 d-flex justify-content-end">
+                                    <button class="btn btn-primary btn-sm edit-btn"
+                                            onclick="openModal()">Create Customer
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped" id="example" style="width:100%">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div aria-hidden="true" aria-labelledby="create-customer-modal" class="modal fade" id="create-customer-modal"
+                     tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Create Customer</h5>
+                                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"
+                                        type="button"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="needs-validation" id="create-customer-form" novalidate>
+                                    <div class="mb-3" onclick="">
+                                        <label class="form-label" for="name">Name</label>
+                                        <input aria-describedby="nameHelp" class="form-control" id="name" name="name" placeholder="Enter name"
+                                               required type="text">
+                                        <div class="invalid-feedback">
+                                            Please provide a name.
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="price">Price</label>
+                                        <input aria-describedby="priceHelp" class="form-control" id="price" min="1" name="price"
+                                               pattern="\d+" placeholder="Enter price" required
+                                               step="1" type="number">
+                                        <div class="invalid-feedback">
+                                            Please provide a price.
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="sku">SKU</label>
+                                        <input aria-describedby="skuHelp" class="form-control" id="sku" name="sku" placeholder="Enter SKU"
+                                               required type="text">
+                                        <div class="invalid-feedback">
+                                            Please provide a SKU.
+                                        </div>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="type">Type</label>
+                                        <select class="form-select" id="type" name="type" required>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="color">Color</label>
+                                        <select class="form-select" id="color" name="color" required>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="supplier">Supplier</label>
+                                        <select id="supplier" name="supplier" required>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="size">Size</label>
+                                        <select id="size" name="size" required>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+                    <div class="col-12 text-start">
+                        <p class="mb-0">
+                            <a class="text-muted" href="#" target="_blank"><strong>Inventory Management</strong></a>
+                            &copy;
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+<script src="js/app.js"></script>
+<script src="js/product.js"></script>
+<script>
+    const openModal = () => {
+        const form = document.querySelector('#create-customer-form');
+        const modal = new bootstrap.Modal(document.querySelector('#create-customer-modal'));
+        form.setAttribute('data-action', 'create');
+        modal.show();
+    };
+</script>
+</body>
+
+</html>

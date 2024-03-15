@@ -1,0 +1,1 @@
+import './modules/customer/customer';
