@@ -17,7 +17,6 @@ const initialize = () => {
     const productSelect = productChoices.getValue();
     const amount = document.querySelector('#amount').value;
     const product = products.find(e => e.id === +productSelect.value);
-    console.log(product);
 
     if (amount > product.stock) {
       return Toast.fire({title: 'Amount is greater than stock', icon: 'warning'});
@@ -59,9 +58,15 @@ const initialize = () => {
       await getData();
       await Toast.fire({title: 'Transaction created', icon: 'success'});
     } catch (e) {
+      addPrd.disabled = false;
+      ev.target.disabled = false;
       await Toast.fire({title: 'Failed', icon: 'error'});
     }
 
+  });
+  document.getElementById('resetItems').addEventListener('click', function (ev) {
+    selectedProducts = [];
+    showProducts();
   });
 };
 
@@ -140,7 +145,6 @@ const renderDataTable = (data) => {
   new DataTable('#example', {
     data: data,
     columns: columns,
-    // Callback function to reattach event listeners after table redraw
     drawCallback: function () {
       const editButtons = document.querySelectorAll('.edit');
       const modal = new bootstrap.Modal(document.querySelector('#info-modal'));
