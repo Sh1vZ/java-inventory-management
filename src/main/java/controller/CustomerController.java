@@ -1,6 +1,7 @@
 package controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import dto.customer.CreateCustomerDTO;
 import dto.customer.CustomerDTO;
 import entity.Customer;
 import jakarta.validation.Valid;
@@ -23,6 +24,14 @@ public class CustomerController extends BaseController {
         this.customerService = new CustomerService();
     }
 
+    @OPTIONS
+    public Response options() {
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With")
+                .build();
+    }
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
@@ -33,14 +42,14 @@ public class CustomerController extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public Response createCustomer(@Valid CustomerDTO customerDto) {
+    public Response createCustomer(@Valid CreateCustomerDTO customerDto) {
         Response validationResponse = BodyValidationUtil.validateAndBuildResponse(customerDto);
         if (validationResponse != null) {
             return validationResponse;
         }
         Customer customer = Mapper.map(customerDto, Customer.class);
         customer = customerService.createCustomer(customer);
-        customerDto = Mapper.map(customer, CustomerDTO.class);
+        customerDto = Mapper.map(customer, CreateCustomerDTO.class);
         return buildResponse("created", Response.Status.CREATED, customerDto);
     }
 
