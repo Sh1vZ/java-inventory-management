@@ -54,47 +54,49 @@ const renderDataTable = (data) => {
   }];
 
   new DataTable('#example', {
-    data: data, columns: columns
-  });
-  const editButtons = document.querySelectorAll('.edit');
-  editButtons.forEach(button => {
-    button.addEventListener('click', event => {
-      const name = document.querySelector('#customer-name');
-      const form = document.querySelector('#create-customer-form');
-      const dataId = button.getAttribute('data-id');
-      const record = data.find(e => e.id === +dataId);
-      name.value = record.name;
-      const modal = new bootstrap.Modal(document.querySelector('#create-customer-modal'));
-      form.setAttribute('data-action', 'update');
-      form.setAttribute('data-id', dataId);
-      modal.show();
-    });
-  });
-  const deleteButtons = document.querySelectorAll('.delete');
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', event => {
-      const dataId = button.getAttribute('data-id');
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'You won\'t be able to revert this!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          try {
-            await postData(API_URL.concat(`/customer/${dataId}`), null, 'DELETE');
-            await getData();
-            await Toast.fire({title: 'Deleted', icon: 'success'});
-          } catch (e) {
-            await Toast.fire({title: 'Delete failed', icon: 'error'});
-          }
-        }
+    data: data, columns: columns, drawCallback: function () {
+      const editButtons = document.querySelectorAll('.edit');
+      editButtons.forEach(button => {
+        button.addEventListener('click', event => {
+          const name = document.querySelector('#customer-name');
+          const form = document.querySelector('#create-customer-form');
+          const dataId = button.getAttribute('data-id');
+          const record = data.find(e => e.id === +dataId);
+          name.value = record.name;
+          const modal = new bootstrap.Modal(document.querySelector('#create-customer-modal'));
+          form.setAttribute('data-action', 'update');
+          form.setAttribute('data-id', dataId);
+          modal.show();
+        });
       });
-    });
+      const deleteButtons = document.querySelectorAll('.delete');
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', event => {
+          const dataId = button.getAttribute('data-id');
+          Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              try {
+                await postData(API_URL.concat(`/customer/${dataId}`), null, 'DELETE');
+                await getData();
+                await Toast.fire({title: 'Deleted', icon: 'success'});
+              } catch (e) {
+                await Toast.fire({title: 'Delete failed', icon: 'error'});
+              }
+            }
+          });
+        });
+      });
+    }
   });
+
 };
 
 

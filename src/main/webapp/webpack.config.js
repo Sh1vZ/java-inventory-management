@@ -17,6 +17,7 @@ module.exports = {
     app: './src/js/app.js',
     customer: './src/js/customer.js',
     inventory: './src/js/inventory.js',
+    transaction: './src/js/transaction.js',
     product: './src/js/product.js'
   },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',

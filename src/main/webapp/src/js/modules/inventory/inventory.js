@@ -3,7 +3,6 @@ import {fetchData, postData} from '../../utils/fetchData';
 import {API_URL} from '../../constants';
 import {disableForm, enableForm, serializeForm} from '../../utils/form';
 import {Toast} from '../../utils/toast';
-import Swal from 'sweetalert2';
 
 const initialize = () => {
   getData().catch(e => alert('fetch error'));
@@ -53,22 +52,24 @@ const renderDataTable = (data) => {
   }];
 
   new DataTable('#example', {
-    data: data, columns: columns
+    data: data, columns: columns, drawCallback: function () {
+      const editButtons = document.querySelectorAll('.edit');
+      editButtons.forEach(button => {
+        button.addEventListener('click', event => {
+          const amount = document.querySelector('#amount');
+          const form = document.querySelector('#create-customer-form');
+          const dataId = button.getAttribute('data-id');
+          const record = data.find(e => e.id === +dataId);
+          amount.value = record.amount;
+          const modal = new bootstrap.Modal(document.querySelector('#create-customer-modal'));
+          form.setAttribute('data-action', 'update');
+          form.setAttribute('data-id', dataId);
+          modal.show();
+        });
+      });
+    }
   });
-  const editButtons = document.querySelectorAll('.edit');
-  editButtons.forEach(button => {
-    button.addEventListener('click', event => {
-      const amount = document.querySelector('#amount');
-      const form = document.querySelector('#create-customer-form');
-      const dataId = button.getAttribute('data-id');
-      const record = data.find(e => e.id === +dataId);
-      amount.value = record.amount;
-      const modal = new bootstrap.Modal(document.querySelector('#create-customer-modal'));
-      form.setAttribute('data-action', 'update');
-      form.setAttribute('data-id', dataId);
-      modal.show();
-    });
-  });
+
 };
 
 
