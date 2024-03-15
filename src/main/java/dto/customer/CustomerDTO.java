@@ -1,6 +1,5 @@
 package dto.customer;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.Date;
@@ -12,10 +11,8 @@ public class CustomerDTO {
     @NotBlank(message = "Name must not be blank")
     private String name;
     private int transactionCount;
-    @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @Column(name = "updated_at")
     private Date updatedAt;
 
     public int getTransactionCount() {
