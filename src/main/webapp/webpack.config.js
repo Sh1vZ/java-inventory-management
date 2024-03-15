@@ -18,6 +18,7 @@ module.exports = {
     customer: './src/js/customer.js',
     inventory: './src/js/inventory.js',
     transaction: './src/js/transaction.js',
+    dashboard: './src/js/dashboard.js',
     product: './src/js/product.js'
   },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
