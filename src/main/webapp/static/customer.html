@@ -13,14 +13,12 @@
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="img/icons/icon-48x48.png" rel="shortcut icon"/>
 
-    <title>Blank Page | AdminKit Demo</title>
+    <title>Customer Page</title>
 
     <link href="css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-
-
 </head>
 
 <body>
@@ -46,59 +44,20 @@
                         <i class="align-middle" data-feather="users"></i> <span class="align-middle">Customers</span>
                     </a>
                 </li>
-                <li class="sidebar-item active">
+                <li class="sidebar-item ">
                     <a class="sidebar-link" href="product.html">
-                        <i class="align-middle" data-feather="bag"></i> <span class="align-middle">Product</span>
+                        <i class="align-middle" data-feather="database"></i> <span class="align-middle">Product</span>
                     </a>
                 </li>
-                <li class="sidebar-header">
-                    Tools & Components
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-buttons.html">
-                        <i class="align-middle" data-feather="square"></i> <span class="align-middle">Buttons</span>
+                <li class="sidebar-item ">
+                    <a class="sidebar-link" href="inventory.html">
+                        <i class="align-middle" data-feather="package"></i> <span class="align-middle">Inventory</span>
                     </a>
                 </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-forms.html">
-                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Forms</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-cards.html">
-                        <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Cards</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-typography.html">
-                        <i class="align-middle" data-feather="align-left"></i> <span
-                            class="align-middle">Typography</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="icons-feather.html">
-                        <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-header">
-                    Plugins & Addons
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="charts-chartjs.html">
-                        <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="maps-google.html">
-                        <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+                <li class="sidebar-item ">
+                    <a class="sidebar-link" href="transaction.html">
+                        <i class="align-middle" data-feather="dollar-sign"></i> <span
+                            class="align-middle">Transaction</span>
                     </a>
                 </li>
             </ul>
@@ -114,14 +73,12 @@
 
         <main class="content">
             <div class="container-fluid p-0">
-
                 <h1 class="h3 mb-3">Customer</h1>
-
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header row">
-                                <h5 class="card-title mb-0 col-6">Empty card</h5>
+                                <h5 class="card-title mb-0 col-6">Customer</h5>
                                 <div class="col-6 d-flex justify-content-end">
                                     <button class="btn btn-primary btn-sm edit-btn" data-id="${row.id}"
                                             onclick="openModal()">Create Customer
@@ -135,7 +92,8 @@
                         </div>
                     </div>
                 </div>
-                <div aria-hidden="true" aria-labelledby="create-customer-modal" class="modal fade" id="create-customer-modal"
+                <div aria-hidden="true" aria-labelledby="create-customer-modal" class="modal fade"
+                     id="create-customer-modal"
                      tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -148,7 +106,8 @@
                                 <form class="needs-validation" id="create-customer-form" novalidate>
                                     <div class="mb-3">
                                         <label class="form-label" for="customer-name">Name</label>
-                                        <input aria-describedby="nameHelp" class="form-control" id="customer-name" name="customer-name"
+                                        <input aria-describedby="nameHelp" class="form-control" id="customer-name"
+                                               name="customer-name"
                                                placeholder="Customer name"
                                                required type="text">
                                         <div class="invalid-feedback">
