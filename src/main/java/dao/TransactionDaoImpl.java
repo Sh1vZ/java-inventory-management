@@ -28,6 +28,28 @@ public class TransactionDaoImpl extends BaseDaoImpl<Transaction, Long> implement
     }
 
     @Override
+    public Long countAllTransactions() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(t) FROM Transaction t", Long.class);
+            return query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Long sumTransactions() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT SUM(total) FROM Transaction t", Long.class);
+            return query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
     public List<Transaction> findAll() {
         EntityManager em = emf.createEntityManager();
         try {

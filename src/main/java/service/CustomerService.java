@@ -27,6 +27,9 @@ public class CustomerService {
         return customerDAO.findAll();
     }
 
+    public Long countAllCustomers() {
+        return customerDAO.countAllCustomers();
+    }
     public void printCustomer(Customer customer) {
         System.out.printf("%-10s %-20s%n", customer.getId(), customer.getName());
     }

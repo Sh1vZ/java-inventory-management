@@ -12,6 +12,10 @@ public interface TransactionDAO extends BaseDAO<Transaction, Long> {
 
     List<Object[]> countOrderPerUser();
 
+    Long countAllTransactions();
+
+    Long sumTransactions();
+
     Transaction createTransaction(Customer customer, List<LineItem> items, Long txTotal);
 
 }

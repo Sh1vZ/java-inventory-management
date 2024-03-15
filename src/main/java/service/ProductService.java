@@ -23,6 +23,9 @@ public class ProductService {
         return prodDAO.save(product,inv);
     }
 
+    public Long countAllProducts() {
+        return prodDAO.countAllProducts();
+    }
     public Product getProductById(Long id) {
         return prodDAO.findById(id);
     }

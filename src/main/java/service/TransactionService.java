@@ -24,6 +24,14 @@ public class TransactionService {
         return txDao.findAll();
     }
 
+    public Long counTransactions() {
+        return txDao.countAllTransactions();
+    }
+
+    public Long sumTransactions() {
+        return txDao.sumTransactions();
+    }
+
     public Transaction getTxById(Long id) {
         return txDao.findById(id);
     }

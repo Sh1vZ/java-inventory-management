@@ -14,6 +14,16 @@ public class ProductDAOImpl extends BaseDaoImpl<Product, Long> implements Produc
         super(Product.class);
     }
 
+    @Override
+    public Long countAllProducts() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(t) FROM Product t", Long.class);
+            return query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
 
     @Override
     public Product save(Product e, Inventory i) {
